@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import styles from './Header.module.css'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -62,7 +62,9 @@ export default function Header() {
 
   return (
     <>
-      <ScrollToSection />
+      <Suspense fallback={null}>
+        <ScrollToSection />
+      </Suspense>
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
         <nav className={`${styles.nav} container`}>
           <Link href="/" className={styles.logo}>
