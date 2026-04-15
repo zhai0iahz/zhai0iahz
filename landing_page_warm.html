@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Court & Craft Tennis | Find Your Own Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: #FFF8F0;
+            color: #3E2723;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ========== UTILITY CLASSES ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 36px;
+            background: linear-gradient(135deg, #E65100 0%, #FF6E40 100%);
+            color: #FFFFFF;
+            text-decoration: none;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+            box-shadow: 0 4px 15px rgba(230, 81, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(230, 81, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #E65100;
+            border: 2px solid #E65100;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(230, 81, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(230, 81, 0, 0.2);
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-fade {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .animate-slide-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .animate-slide-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        /* ========== HEADER/NAV ========== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 248, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(62, 39, 35, 0.1);
+            padding: 15px 0;
+        }
+
+        nav.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #E65100;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 50px;
+        }
+
+        .nav-links a {
+            color: #3E2723;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #E65100;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #E65100, #F9A825);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            margin-top: 60px;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(249, 168, 37, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(230, 81, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tagline {
+            color: #E65100;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: #3E2723;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #5D4037;
+            margin-bottom: 40px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .hero-image {
+            margin-top: 60px;
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 232, 214, 0.6));
+            border-radius: 20px;
+            text-align: center;
+            color: #9E7B79;
+            font-size: 16px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            box-shadow: 0 20px 50px rgba(230, 81, 0, 0.1);
+            border: 2px solid rgba(249, 168, 37, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 20px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero-image {
+                min-height: 300px;
+            }
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about {
+            padding: 100px 20px;
+            background: #FFFFFF;
+        }
+
+        .about .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(249, 168, 37, 0.08), rgba(230, 81, 0, 0.06));
+            border-radius: 20px;
+            text-align: center;
+            color: #9E7B79;
+            font-size: 16px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 40px rgba(230, 81, 0, 0.08);
+        }
+
+        .about h2 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #3E2723;
+        }
+
+        .about p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #5D4037;
+            line-height: 1.8;
+        }
+
+        .about-highlight {
+            background: linear-gradient(135deg, rgba(249, 168, 37, 0.1), rgba(230, 81, 0, 0.08));
+            border-left: 5px solid #E65100;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            color: #E65100;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .about .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about h2 {
+                font-size: 36px;
+            }
+
+            .about-image {
+                min-height: 300px;
+            }
+        }
+
+        /* ========== SERVICES SECTION ========== */
+        .services {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 60px;
+            color: #3E2723;
+        }
+
+        .section-title .highlight {
+            color: #E65100;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(62, 39, 35, 0.08);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #E65100, #F9A825);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(230, 81, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .service-card h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #3E2723;
+        }
+
+        .service-card p {
+            color: #5D4037;
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .service-price {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #E65100;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 36px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== APPROACH SECTION ========== */
+        .approach {
+            padding: 100px 20px;
+            background: #FFFFFF;
+        }
+
+        .approach .container {
+            max-width: 900px;
+        }
+
+        .approach h2 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #3E2723;
+        }
+
+        .approach .highlight {
+            color: #E65100;
+        }
+
+        .approach-intro {
+            font-size: 18px;
+            color: #5D4037;
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .philosophy-item {
+            background: linear-gradient(135deg, rgba(249, 168, 37, 0.08), rgba(230, 81, 0, 0.05));
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(249, 168, 37, 0.2);
+        }
+
+        .philosophy-item:hover {
+            background: linear-gradient(135deg, rgba(249, 168, 37, 0.15), rgba(230, 81, 0, 0.1));
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(230, 81, 0, 0.12);
+        }
+
+        .philosophy-item h3 {
+            color: #E65100;
+            margin-bottom: 15px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .philosophy-item p {
+            color: #5D4037;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .approach h2 {
+                font-size: 36px;
+            }
+
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== TESTIMONIALS SECTION ========== */
+        .testimonials {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+        }
+
+        .testimonials .container {
+            max-width: 900px;
+        }
+
+        .testimonials h2 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 60px;
+            color: #3E2723;
+            text-align: center;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial {
+            background: #FFFFFF;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(62, 39, 35, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            border-top: 5px solid #F9A825;
+        }
+
+        .testimonial:hover {
+            box-shadow: 0 16px 40px rgba(230, 81, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-text {
+            color: #5D4037;
+            font-size: 15px;
+            margin-bottom: 25px;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            color: #3E2723;
+            font-weight: 700;
+            font-family: 'Quicksand', sans-serif;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-role {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .stars {
+            color: #F9A825;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .testimonials h2 {
+                font-size: 36px;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== COMMUNITY SECTION ========== */
+        .community {
+            padding: 100px 20px;
+            background: #FFFFFF;
+        }
+
+        .community .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .community h2 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #3E2723;
+        }
+
+        .community h2 .highlight {
+            color: #E65100;
+        }
+
+        .community p {
+            font-size: 16px;
+            color: #5D4037;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .community-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(249, 168, 37, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .community-feature:hover {
+            background: rgba(249, 168, 37, 0.12);
+            transform: translateX(5px);
+        }
+
+        .community-feature-icon {
+            font-size: 32px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .community-feature-text h3 {
+            color: #3E2723;
+            margin-bottom: 5px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+        }
+
+        .community-feature-text p {
+            margin: 0;
+            color: #5D4037;
+            font-size: 14px;
+        }
+
+        .community-image {
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(249, 168, 37, 0.08), rgba(230, 81, 0, 0.06));
+            border-radius: 20px;
+            text-align: center;
+            color: #9E7B79;
+            font-size: 16px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 40px rgba(230, 81, 0, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            .community .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .community h2 {
+                font-size: 36px;
+            }
+
+            .community-image {
+                min-height: 300px;
+            }
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+        }
+
+        .contact .container {
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #3E2723;
+        }
+
+        .contact .highlight {
+            color: #E65100;
+        }
+
+        .contact-intro {
+            font-size: 18px;
+            color: #5D4037;
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .contact-item {
+            background: #FFFFFF;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(62, 39, 35, 0.08);
+            transition: all 0.3s ease;
+            border-top: 5px solid #F9A825;
+        }
+
+        .contact-item:hover {
+            box-shadow: 0 16px 40px rgba(230, 81, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .contact-item h3 {
+            color: #E65100;
+            margin-bottom: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+        }
+
+        .contact-item p {
+            color: #5D4037;
+            margin: 0;
+        }
+
+        .contact-form {
+            background: #FFFFFF;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(230, 81, 0, 0.12);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #3E2723;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #FFF8F0;
+            border: 2px solid rgba(230, 81, 0, 0.2);
+            color: #3E2723;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #E65100;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .contact h2 {
+                font-size: 36px;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: #3E2723;
+            padding: 50px 20px 30px;
+            color: #C0A9A0;
+        }
+
+        footer .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        footer h3 {
+            color: #FFFFFF;
+            margin-bottom: 15px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        footer p,
+        footer a {
+            font-size: 13px;
+            color: #C0A9A0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        footer a:hover {
+            color: #F9A825;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            background: rgba(249, 168, 37, 0.2);
+            color: #F9A825;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: #F9A825;
+            color: #FFFFFF;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            color: #9E7B79;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            footer .container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+
+            footer p,
+            footer a {
+                display: inline;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .scroll-animate {
+            opacity: 0;
+        }
+
+        .scroll-animate.visible {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Court & Craft</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#approach">Approach</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="tagline">Find Your Own Game</p>
+            <h1>Tennis for Everyone, Especially You</h1>
+            <p class="hero-subtitle">Whether you're a beginner, an academic, a gamer, or just someone curious about tennis—Jason creates a welcoming, judgment-free space where anyone can learn, grow, and fall in love with the game.</p>
+            <div class="hero-cta">
+                <button class="btn">Book Your First Session</button>
+                <button class="btn btn-secondary">Learn About Jason</button>
+            </div>
+            <div class="hero-image">
+                📸 Hero Image: Jason welcoming a new student, warm and encouraging
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-image">
+                📸 About Image: Jason candid moment or teaching moment
+            </div>
+            <div>
+                <h2>Meet Jason</h2>
+                <p>Jason is a educator, philosopher, and performer who genuinely believes tennis should be for everyone. He specializes in helping beginners—especially those from non-athletic backgrounds—discover the joy and confidence that comes with learning tennis the right way.</p>
+                <p>Located near Irvine Spectrum Center, Jason works with academics, gamers, artists, and unconventional thinkers who might never have imagined themselves on a tennis court. He meets you exactly where you are and helps you grow from there.</p>
+                <div class="about-highlight">
+                    "I am an advocate for finding one's own tennis, no matter how unconventional."
+                </div>
+                <p>His philosophy is simple but powerful: <strong>Fuel the passion, Burn the waste, Save the lessons.</strong> Every lesson with Jason is about building confidence, discovering your authentic style, and creating lasting joy in the game.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our <span class="highlight">Services</span></h2>
+            <div class="services-grid">
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">🎾</div>
+                    <h3>Private Lessons</h3>
+                    <p>One-on-one coaching customized for you. Whether 60 or 90 minutes, every lesson is tailored to your goals and learning style.</p>
+                    <div class="service-price">$80–$140</div>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">🤖</div>
+                    <h3>Ball Machine Training</h3>
+                    <p>Consistent, precision drills to develop stroke mechanics and confidence in a pressure-free environment.</p>
+                    <div class="service-price">Included in lessons</div>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">🧠</div>
+                    <h3>Inner Game Coaching</h3>
+                    <p>Build mental strength, overcome anxiety, and unlock the confidence that's already inside you.</p>
+                    <div class="service-price">$90–$120</div>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">🔧</div>
+                    <h3>Racquet Restringing</h3>
+                    <p>Professional restringing to keep your racquet feeling perfect and performing at its best.</p>
+                    <div class="service-price">From $25</div>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">⚡</div>
+                    <h3>Equipment Customization</h3>
+                    <p>Custom grip adjustments, weight mods, and personalization to match your unique playing style.</p>
+                    <div class="service-price">From $50</div>
+                </div>
+                <div class="service-card scroll-animate">
+                    <div class="service-icon">🤝</div>
+                    <h3>Community & Matchmaking</h3>
+                    <p>Join a warm, welcoming community of Court & Craft players. Find partners, play together, build friendships.</p>
+                    <div class="service-price">Free for members</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPROACH SECTION -->
+    <section class="approach" id="approach">
+        <div class="container">
+            <h2>The <span class="highlight">Court & Craft</span> Way</h2>
+            <p class="approach-intro">Here's what makes learning with Jason different and so welcoming:</p>
+            <div class="philosophy-grid">
+                <div class="philosophy-item scroll-animate">
+                    <h3>🎮 Gaming Mechanics</h3>
+                    <p>We explain tennis through frameworks you already understand—levels, progression, strategy. Makes it click faster and feels more natural.</p>
+                </div>
+                <div class="philosophy-item scroll-animate">
+                    <h3>🎨 Your Style</h3>
+                    <p>There's no "right way" to be a tennis player. We help you find your authentic style and build it with confidence.</p>
+                </div>
+                <div class="philosophy-item scroll-animate">
+                    <h3>💭 Psychology First</h3>
+                    <p>Self-doubt and anxiety are normal. Jason helps you understand and overcome them with proven mental techniques.</p>
+                </div>
+                <div class="philosophy-item scroll-animate">
+                    <h3>🤗 Beginner-Friendly</h3>
+                    <p>No athletic background? Perfect. We specialize in bringing newcomers into tennis with joy, warmth, and zero judgment.</p>
+                </div>
+                <div class="philosophy-item scroll-animate">
+                    <h3>📚 Mentorship</h3>
+                    <p>Jason isn't just a coach—he's a mentor invested in your growth as a person, not just a player.</p>
+                </div>
+                <div class="philosophy-item scroll-animate">
+                    <h3>🔥 Fuel. Burn. Save.</h3>
+                    <p>Fuel your passion for tennis. Burn away bad habits and self-doubt. Save the lessons for a lifetime of growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2>What Our Community Says</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial scroll-animate">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"I was absolutely terrified of tennis and thought I was too old to start. After one lesson with Jason, all that fear disappeared. He made me feel so welcome and believed in me. I'm more confident than ever."</p>
+                    <div class="testimonial-author">Sarah M.</div>
+                    <div class="testimonial-role">Teacher, beginner player</div>
+                </div>
+                <div class="testimonial scroll-animate">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"As someone who's been gaming my whole life, I never connected with sports. Then Jason explained tennis through gaming mechanics and suddenly everything made sense. I'm getting better every week!"</p>
+                    <div class="testimonial-author">Alex T.</div>
+                    <div class="testimonial-role">Software engineer, new player</div>
+                </div>
+                <div class="testimonial scroll-animate">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Jason doesn't just teach tennis—he teaches you about yourself. His inner game coaching helped me work through anxiety that was affecting everything in my life. Truly transformative."</p>
+                    <div class="testimonial-author">Jordan P.</div>
+                    <div class="testimonial-role">Business owner, intermediate player</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMUNITY SECTION -->
+    <section class="community">
+        <div class="container">
+            <div>
+                <h2>Join the <span class="highlight">Court & Craft</span> Community</h2>
+                <p>We're building a warm, inclusive tennis community where unconventional players thrive. Everyone belongs here.</p>
+
+                <div class="community-feature">
+                    <div class="community-feature-icon">👥</div>
+                    <div class="community-feature-text">
+                        <h3>Player Matchmaking</h3>
+                        <p>Find practice partners and friendly competitors from our welcoming community of Court & Craft players.</p>
+                    </div>
+                </div>
+
+                <div class="community-feature">
+                    <div class="community-feature-icon">🏆</div>
+                    <div class="community-feature-text">
+                        <h3>Tournaments & Social Events</h3>
+                        <p>Low-pressure, fun community tournaments and social events designed to celebrate growth at every level.</p>
+                    </div>
+                </div>
+
+                <div class="community-feature">
+                    <div class="community-feature-icon">📚</div>
+                    <div class="community-feature-text">
+                        <h3>Exclusive Resources</h3>
+                        <p>Access to Jason's philosophy guides, gaming mechanics breakdowns, and mental game playbooks.</p>
+                    </div>
+                </div>
+
+                <div class="community-feature">
+                    <div class="community-feature-icon">🌟</div>
+                    <div class="community-feature-text">
+                        <h3>Ambassador Program</h3>
+                        <p>Help bring more people into tennis. Become a Court & Craft ambassador and help others find their game.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="community-image">
+                📸 Community Image: Diverse group of players smiling together
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Ready to <span class="highlight">Find Your Game?</span></h2>
+            <p class="contact-intro">Your first lesson with Jason is a conversation, not a pressure test. Let's get you started on your tennis journey.</p>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📍 Location</h3>
+                    <p>Near Irvine Spectrum Center, CA</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📞 Phone</h3>
+                    <p><a href="tel:+1234567890">(123) 456-7890</a></p>
+                </div>
+                <div class="contact-item">
+                    <h3>✉️ Email</h3>
+                    <p><a href="mailto:jason@courtandcraft.com">jason@courtandcraft.com</a></p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone (Optional)</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tell Jason About You</label>
+                        <textarea id="message" name="message" placeholder="Your background, what brings you to tennis, any concerns..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Request a Session</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div>
+                <h3>About Court & Craft</h3>
+                <p>We help unconventional learners discover their authentic tennis through philosophy, psychology, gaming mechanics, and genuine mentorship. Tennis is for everyone.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <a href="#about">Meet Jason</a>
+                <a href="#services">Services</a>
+                <a href="#approach">Our Philosophy</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div>
+                <h3>Stay Connected</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-icon" title="Instagram">📷</a>
+                    <a href="#" class="social-icon" title="Facebook">f</a>
+                    <a href="#" class="social-icon" title="Twitter">𝕏</a>
+                    <a href="#" class="social-icon" title="LinkedIn">in</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Court & Craft Tennis. All rights reserved. Find Your Own Game.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission handler
+        document.querySelector('form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for reaching out! Jason will contact you soon. We\'re excited to help you find your game!');
+            this.reset();
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 8px 30px rgba(230, 81, 0, 0.15)';
+            } else {
+                header.style.boxShadow = '0 4px 20px rgba(62, 39, 35, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>

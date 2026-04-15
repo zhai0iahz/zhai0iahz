@@ -1,0 +1,27 @@
+.section {
+  padding: 100px 20px;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: var(--color-secondary);
+}
+
+.highlight {
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+}

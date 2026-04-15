@@ -1,0 +1,172 @@
+.services {
+  padding: 100px 20px;
+  background: var(--color-surface);
+}
+
+.sectionTitle {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 60px;
+  color: var(--color-text);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.sectionTitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.servicesWrapper {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.octagonDecor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.octagonSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.octagonSvg polygon {
+  fill: var(--color-primary);
+}
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.serviceCard {
+  background: var(--color-background);
+  border-radius: var(--radius-lg);
+  padding: 35px 30px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  border: 1px solid var(--color-border);
+}
+
+.grid.visible .serviceCard {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.serviceCard:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+  transform: translateY(-8px);
+}
+
+.iconWrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  background: var(--color-primary-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.serviceCard:hover .iconWrapper {
+  transform: scale(1.1);
+  background: var(--color-primary);
+}
+
+.serviceCard:hover .serviceIcon {
+  transform: scale(1.2);
+}
+
+.serviceIcon {
+  font-size: 32px;
+  transition: transform 0.3s ease;
+}
+
+.serviceCard h3 {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--color-text);
+}
+
+.serviceCard p {
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.priceTag {
+  display: inline-block;
+  padding: 8px 20px;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 20px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.serviceCard:hover .priceTag {
+  background: var(--color-primary);
+  color: #FFFFFF;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .octagonDecor {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .services {
+    padding: 80px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .serviceCard {
+    padding: 30px 25px;
+  }
+
+  .serviceCard:hover {
+    transform: translateY(-5px);
+  }
+}
