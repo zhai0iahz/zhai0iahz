@@ -5,6 +5,7 @@ const nextConfig = {
   },
   basePath: '/quest',
   assetPrefix: '/quest/',
+  output: 'export',
 }
 
 module.exports = nextConfig
